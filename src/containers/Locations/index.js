@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import './Location.css';
 import { connect } from 'react-redux';
 import AutoComplete from 'react-google-autocomplete';
+import { addLocation } from '../../actions';
 
 const styles = {
   height: '30px',
@@ -20,14 +21,28 @@ class Location extends Component {
           onPlaceSelected={place => {
             console.log('place :', place)
             const startLatitude = place.geometry.location.lat();
+            const startLongtitude = place.geometry.location.lng();
             console.log('sl: ', startLatitude)
+            console.log('sl: ', startLongtitude)
           }}
           type={['address']}
-          componentRestrictions={{country: ["us", "ca", "mx", "fr", "es"]}}
+          componentRestrictions={{country: ["us", "ca", "mx"]}}
         />
+        <AutoComplete
+          style={styles}
+          onPlaceSelected={place => {
+            const endtLatitude = place.geometry.location.lat();
+            const endtLongtitude = place.geometry.location.lng();
+          }}
+          type={['address']}
+          componentRestrictions={{country: ["us", "ca", "mx"]}}
+        />
+
       </div>
     )
   }
 }
+
+//mapStateToProps
 
 export default connect()(Location);
