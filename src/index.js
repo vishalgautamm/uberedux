@@ -12,7 +12,7 @@ const middleware = [thunk];
 
 const createStoreWithMiddleware = applyMiddleware(...middleware)(createStore);
 
-const store = createStoreWithMiddleware(reducers, window.__REDUX_DEVTOOLS_EXTENSIONS__ && window.__REDUX_DEVTOOLS_EXTENSIONS__());
+const store = createStoreWithMiddleware(reducers, window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__());
 
 ReactDOM.render(
   <Provider store={store} >

@@ -19,20 +19,19 @@ class Location extends Component {
         <AutoComplete
           style={styles}
           onPlaceSelected={place => {
-            console.log('place :', place)
             const startLatitude = place.geometry.location.lat();
             const startLongtitude = place.geometry.location.lng();
-            console.log('sl: ', startLatitude)
-            console.log('sl: ', startLongtitude)
+            this.props.addLocationAction({ startLatitude, startLongtitude })
           }}
           type={['address']}
-          componentRestrictions={{country: ["us", "ca", "mx"]}}
+          componentRestrictions={{country: "us"}}
         />
         <AutoComplete
           style={styles}
           onPlaceSelected={place => {
             const endtLatitude = place.geometry.location.lat();
             const endtLongtitude = place.geometry.location.lng();
+            this.props.addLocationAction({ endtLatitude, endtLongtitude })
           }}
           type={['address']}
           componentRestrictions={{country: ["us", "ca", "mx"]}}
@@ -45,4 +44,8 @@ class Location extends Component {
 
 //mapStateToProps
 
-export default connect()(Location);
+const mapDispatchToProps = dispatch => ({
+  addLocationAction: (location => dispatch(addLocation(location)))
+})
+
+export default connect(null, mapDispatchToProps)(Location);
